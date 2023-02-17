@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tour</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"
+    ></script>
+    <style>
+      .container {
+        display: flex;
+        background-color: #3c3c3c; /* Dark gray background */
+        /* height: 100vh; Full height */
+      }
+
+      #buttons {
+        width: 200px;
+        height: 100vh;
+        float: left;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+        overflow-y: scroll;
+        top: 0;
+        bottom: 0;
+        padding: 10px;
+      }
+
+      #buttons button {
+        width: 100%;
+        height: 40px;
+        padding: 5px;
+        color: #ffffff; /* White text color */
+        background-color: #212121; /* Black background */
+        border: none;
+        margin-bottom: 10px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        border-radius: 5px; /* Rounded corners */
+      }
+
+      #buttons button:hover {
+        background-color: #333; /* Darker gray on hover */
+      }
+
+      #panorama {
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="buttons">
+        <button id="btnCircle">Circle</button>
+        <button id="btnHouse">House</button>
+        <button id="btnUnicorn">Unicorn</button>
+        <button id="btnmoon">Moon</button>
+      </div>
+      <div id="panorama"></div>
+    </div>
+    <script>
+      var viewer = pannellum.viewer("panorama", {
+        default: {
+          firstScene: "circle",
+          sceneFadeDuration: 1000
+        },
+        scenes: {
+          circle: {
+            hfov: 110,
+            autoLoad: true,
+            pitch: -3,
+            yaw: 117,
+
+            type: "equirectangular",
+            preview: "Images/image11.png",
+            panorama: "Images/image33.jpg",
+            hotSpots: [
+              {
+                pitch: -2.1,
+                yaw: 132.9,
+                type: "scene",
+                text: "Go to next",
+                sceneId: "house"
+              }
+            ]
+          },
+          house: {
+            hfov: 110,
+            yaw: 5,
+            type: "equirectangular",
+            preview: "Images/image2.jpg",
+            panorama: "Images/image2.jpg",
+            autoLoad: true,
+            hotSpots: [
+              {
+                pitch: -0.6,
+                yaw: 37.1,
+                type: "scene",
+                sceneId: "unicorn",
+                targetYaw: -23,
+                targetPitch: 2
+              },
+              {
+                pitch: 2,
+                yaw: 75,
+                type: "scene",
+                sceneId: "circle",
+                targetYaw: 45,
+                targetPitch: -2
+              }
+            ]
+          },
+          unicorn: {
+            hfov: 110,
+            autoLoad: true,
+            yaw: 5,
+            type: "equirectangular",
+            preview: "Images/360photoconverter.jpg",
+            panorama: "Images/360photoconverter.jpg",
+            hotSpots: [
+              {
+                pitch: -0.6,
+                yaw: 37.1,
+                type: "scene",
+                sceneId: "moon",
+                targetYaw: -23,
+                targetPitch: 2
+              }
+            ]
+          },
+          moon: {
+            hfov: 110,
+            autoLoad: true,
+            yaw: 5,
+            type: "equirectangular",
+            preview: "Images/moon.jpg",
+            panorama: "Images/moon.jpg",
+            hotSpots: [
+              {
+                pitch: -0.6,
+                yaw: 37.1,
+                type: "scene",
+                sceneId: "circle",
+                targetYaw: -23,
+                targetPitch: 2
+              }
+            ]
+          }
+        }
+      });
+
+      document
+        .getElementById("btnCircle")
+        .addEventListener("click", function () {
+          viewer.loadScene("circle");
+        });
+      document
+        .getElementById("btnHouse")
+        .addEventListener("click", function () {
+          viewer.loadScene("house");
+        });
+      document
+        .getElementById("btnUnicorn")
+        .addEventListener("click", function () {
+          viewer.loadScene("unicorn");
+        });
+      document.getElementById("btnmoon").addEventListener("click", function () {
+        viewer.loadScene("moon");
+      });
+    </script>
+  </body>
+</html>

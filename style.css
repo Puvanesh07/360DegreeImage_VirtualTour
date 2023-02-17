@@ -1,0 +1,29 @@
+
+    .container {
+      display: flex;
+      height: 60vh;
+    }
+
+    .left-panel {
+      width: 20%;
+      background-color: lightgray;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+    .right-panel {
+      width: 50%;
+      height: 100vh;
+      margin-left: 200px;
+    }
+    
+
+
+    a-scene {
+      display: block;
+      position: relative;
+      height: 50%;
+      width: 50%;
+    }
